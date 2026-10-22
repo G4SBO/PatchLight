@@ -68,6 +68,35 @@ public sealed class NewsTests : IDisposable
         Assert.Single(NewsMatcher.ReportsFor(articles, Update("KB5127648")));
     }
 
+    [Fact]
+    public void BleepingComputer_fixture_matches_unresolved_update_problems()
+    {
+        Assert.Contains(RssNewsSource.DefaultFeeds,
+            feed => feed.Name == "BleepingComputer" && feed.Url == "https://www.bleepingcomputer.com/feed/");
+        var xml = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Fixtures", "bleepingcomputer-feed.xml"));
+        var articles = NewsFeedParser.Parse(xml, "BleepingComputer");
+
+        var matches = NewsMatcher.ReportsFor(articles, Update("KB5127648"));
+
+        var article = Assert.Single(matches);
+        Assert.Equal("BleepingComputer", article.Source);
+        Assert.Equal("Microsoft: October Windows update may break Smart App Control", article.Title);
+        Assert.Equal(
+            "https://www.bleepingcomputer.com/news/microsoft/kb5127648-windows-security-update-may-break-smart-app-control/",
+            article.Url);
+    }
+
+    [Theory]
+    [InlineData("Best Windows 11 laptop deals this week")]
+    [InlineData("Windows 11 KB5127648 review: everything new")]
+    [InlineData("Microsoft PowerToys adds CursorHide, Button Lock mouse tools")]
+    public void Ignores_deals_reviews_and_other_products(string title)
+    {
+        var articles = NewsFeedParser.Parse(Feed((title, "KB5127648", Day)), "BleepingComputer");
+
+        Assert.Empty(NewsMatcher.ReportsFor(articles, Update("KB5127648")));
+    }
+
     [Theory]
     [InlineData("Tue, 13 Oct 2026 14:00:00 EDT")]
     [InlineData("Tue, 13 Oct 2026 18:00:00 GMT")]
