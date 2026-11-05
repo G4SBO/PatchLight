@@ -32,7 +32,7 @@ Microsoft's own list of known problems and gives it a light:
   One click on **Uninstall this update** removes it, and PatchLight keeps it paused until Microsoft fixes the problem.
 - **New Windows versions too:** When Windows offers an upgrade like "Windows 11, version 26H2", PatchLight checks it
   against Microsoft's known issues for that version, so you know whether to wait.
-- **Early warnings from tech news:** Problems often show up on Neowin and Windows Latest days before Microsoft lists them.
+- **Early warnings from tech news:** Problems often show up on Neowin, Windows Latest and BleepingComputer days before Microsoft lists them.
   A report turns a safe update into 🟡 Wait (never 🔴), with a link to the article. You can turn this off in Settings.
 - **Only problems that matter to you:** Some known problems only hit company PCs (domains, virtual desktops, servers).
   On a home PC they're still listed but don't turn the light red. Company and school PCs count everything.
@@ -115,8 +115,8 @@ paused, removes the automatic check, the "wait" policy it set and "Start with Wi
 
 PatchLight doesn't collect, send or share anything about you or your PC. Over the network it only:
 - downloads Microsoft's public Windows release health pages (for your Windows version, and for any new version Windows offers you),
-- downloads the public news feeds of [Neowin](https://www.neowin.net/news/rss/) and [Windows Latest](https://www.windowslatest.com/feed/)
-  to spot reported problems (turn this off in Settings, or run `patchlight --no-news`),
+- downloads the public news feeds of [Neowin](https://www.neowin.net/news/rss/), [Windows Latest](https://www.windowslatest.com/feed/),
+  and [BleepingComputer](https://www.bleepingcomputer.com/feed/) to spot reported problems (turn this off in Settings, or run `patchlight --no-news`),
 - asks Windows Update on your own PC which updates are waiting.
 
 No account, no analytics, no server of ours. Like any app that reads a web page, these downloads show the sites your

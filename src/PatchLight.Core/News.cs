@@ -112,6 +112,7 @@ public sealed class RssNewsSource(HttpClient http, string storePath, TimeProvide
     [
         ("Neowin", "https://www.neowin.net/news/rss/"),
         ("Windows Latest", "https://www.windowslatest.com/feed/"),
+        ("BleepingComputer", "https://www.bleepingcomputer.com/feed/"),
     ];
 
     private static readonly TimeSpan KeepFor = TimeSpan.FromDays(30);

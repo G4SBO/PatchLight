@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>BleepingComputer</title>
+    <link>https://www.bleepingcomputer.com/</link>
+    <description>Latest technology news</description>
+    <item>
+      <title>Microsoft: October Windows update may break Smart App Control</title>
+      <link>https://www.bleepingcomputer.com/news/microsoft/kb5127648-windows-security-update-may-break-smart-app-control/</link>
+      <description><![CDATA[Microsoft says some users may have trouble turning on Smart App Control after installing this month's KB5127648 Windows 11 security update.]]></description>
+      <pubDate>Fri, 16 Oct 2026 08:44:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Microsoft fixes bug causing Windows black screens, Explorer crashes</title>
+      <link>https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-bug-causing-windows-black-screens-explorer-crashes/</link>
+      <description><![CDATA[Microsoft has resolved a known issue that was causing black screens, desktop loading issues, and Explorer crashes after installing Windows 11 updates released since August.]]></description>
+      <pubDate>Thu, 15 Oct 2026 09:10:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Microsoft PowerToys adds CursorHide, Button Lock mouse tools</title>
+      <link>https://www.bleepingcomputer.com/news/microsoft/microsoft-powertoys-adds-cursorhide-button-lock-mouse-tools/</link>
+      <description><![CDATA[Microsoft has released PowerToys 0.102, with two new mouse utilities, new command-line tools, and Command Palette improvements.]]></description>
+      <pubDate>Wed, 21 Oct 2026 12:20:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Windows 11 KB5127648 &amp; KB5126653 cumulative updates released</title>
+      <link>https://www.bleepingcomputer.com/news/microsoft/windows-11-kb5127648-and-kb5126653-cumulative-updates-released/</link>
+      <description><![CDATA[Microsoft has released the Patch Tuesday Windows 11 KB5127648 and KB5126653 cumulative updates to fix security vulnerabilities and bugs, and add new features.]]></description>
+      <pubDate>Tue, 13 Oct 2026 17:49:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
