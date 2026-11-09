@@ -28,13 +28,12 @@ public static class CliApp
             }
 
             var windows = SystemInfo.Read();
-            if (!windows.IsWindows11 || windows.DisplayVersion is null)
-                throw new PatchLightException("PatchLight works on Windows 11 only for now.");
+            if (!windows.IsSupported) throw new PatchLightException(WindowsInfo.NotSupportedMessage);
 
             var isAdmin = SystemInfo.IsAdministrator();
             // The daily check runs as SYSTEM and trusts this folder, so lock it whenever we can.
             if (isAdmin) DataFolder.Secure(SystemInfo.DataDirectory);
-            var service = PatchLightHost.CreateService(windows.DisplayVersion);
+            var service = PatchLightHost.CreateService(windows.Release);
             if (!args.Contains("--no-news", StringComparer.OrdinalIgnoreCase)) service.News = PatchLightHost.CreateNewsSource();
 
             switch (command)

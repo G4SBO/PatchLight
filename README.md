@@ -2,7 +2,7 @@
 
 **Know if a Windows update is safe before you install it.**
 
-**[⬇ Download PatchLight for Windows 11](https://github.com/G4SBO/PatchLight/releases/latest/download/PatchLight-Setup.exe)** (installer, 46 MB) · [All downloads](https://github.com/G4SBO/PatchLight/releases/latest) · [Is it safe?](#is-it-safe)
+**[⬇ Download PatchLight for Windows 11 and 10](https://github.com/G4SBO/PatchLight/releases/latest/download/PatchLight-Setup.exe)** (installer, 46 MB) · [All downloads](https://github.com/G4SBO/PatchLight/releases/latest) · [Is it safe?](#is-it-safe)
 
 > Use the download link above. The green **Code → Download ZIP** button gives you the source code, not the app.
 
@@ -44,7 +44,7 @@ Microsoft's own list of known problems and gives it a light:
     so waiting gives problems time to show up. On Pro, Enterprise and Education this uses Windows' own deferral setting;
     on Home, PatchLight pauses new updates until they're old enough.
 
-Windows 11 only. Free and open source. No account, no server, no tracking: your PC reads
+Windows 11, and Windows 10 version 22H2 (still patched under Extended Security Updates). Free and open source. No account, no server, no tracking: your PC reads
 Microsoft's public [Windows release health](https://learn.microsoft.com/en-us/windows/release-health/) pages directly.
 
 ## Get it

@@ -6,7 +6,17 @@ using PatchLight.Core;
 
 namespace PatchLight.Windows;
 
-public sealed record WindowsInfo(string? DisplayVersion, Version Build, bool IsWindows11);
+public sealed record WindowsInfo(string? DisplayVersion, Version Build)
+{
+    // Windows 11, or Windows 10 22H2 (the only Windows 10 version still getting updates).
+    public bool IsSupported => DisplayVersion is not null && WindowsRelease.IsSupported(Build.Major);
+
+    // The known-issues page this PC is judged against: "25H2" on Windows 11, "10-22H2" on Windows 10.
+    public string Release => WindowsRelease.ForPc(Build.Major, DisplayVersion
+        ?? throw new PatchLightException(NotSupportedMessage));
+
+    public const string NotSupportedMessage = "PatchLight works on Windows 11 and Windows 10 version 22H2.";
+}
 
 [SupportedOSPlatform("windows")]
 public static class SystemInfo
@@ -15,13 +25,14 @@ public static class SystemInfo
         Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "PatchLight");
 
     // ProductName says "Windows 10" on Windows 11, so go by the build number.
+    // Windows 10 22H2 reports DisplayVersion "22H2"; older Windows 10 versions have none.
     public static WindowsInfo Read()
     {
         using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")
             ?? throw new PatchLightException("Couldn't read the Windows version on this PC.");
         var build = int.Parse((string)key.GetValue("CurrentBuild", "0")!);
         var ubr = Convert.ToInt32(key.GetValue("UBR", 0));
-        return new WindowsInfo(key.GetValue("DisplayVersion") as string, new Version(build, ubr), build >= 22000);
+        return new WindowsInfo(key.GetValue("DisplayVersion") as string, new Version(build, ubr));
     }
 
     // Windows Home ("Core", "CoreSingleLanguage", ...) ignores Windows Update policies like the deferral one.

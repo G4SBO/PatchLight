@@ -35,6 +35,10 @@ public sealed partial class MainWindow : Window
         this.controller = controller;
         InitializeComponent();
 
+        // Mica is Windows 11 only; Windows 10 gets acrylic, which it supports, instead of a flat fallback.
+        if (!Microsoft.UI.Composition.SystemBackdrops.MicaController.IsSupported())
+            SystemBackdrop = new DesktopAcrylicBackdrop();
+
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(TitleBar);
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets", "app.ico"));

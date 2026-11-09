@@ -25,7 +25,7 @@ PrivilegesRequired=admin
 PrivilegesRequiredOverridesAllowed=commandline
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
-MinVersion=10.0.22000
+MinVersion=10.0.19045
 ; Asks the person to close PatchLight (it may be in the tray) before installing or removing it.
 AppMutex=PatchLight.App.Instance
 CloseApplications=yes

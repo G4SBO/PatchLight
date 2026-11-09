@@ -1,3 +1,4 @@
+using PatchLight.Core;
 using PatchLight.Windows;
 
 namespace PatchLight.Tests;
@@ -7,12 +8,13 @@ namespace PatchLight.Tests;
 public class WindowsIntegrationTests
 {
     [Fact]
-    public void Detects_windows_11_even_though_the_registry_says_windows_10()
+    public void Detects_a_supported_windows_version()
     {
         var info = SystemInfo.Read();
-        Assert.True(info.IsWindows11);
+        Assert.True(info.IsSupported);
         Assert.Matches(@"^\d\dH\d$", info.DisplayVersion!);
-        Assert.True(info.Build.Major >= 22000);
+        // ProductName says "Windows 10" on Windows 11 too, so the release must come from the build number.
+        Assert.Equal(info.Build.Major < 22000, WindowsRelease.IsWindows10(info.Release));
     }
 
     [Fact]

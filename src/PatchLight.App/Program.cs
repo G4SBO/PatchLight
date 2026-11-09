@@ -48,7 +48,7 @@ public static class Program
         try
         {
             DataFolder.Secure(SystemInfo.DataDirectory);
-            var service = PatchLightHost.CreateService(RequireWindows11());
+            var service = PatchLightHost.CreateService(RequireSupportedWindows());
             BackgroundCheck.RunAsync(service, logPath, TimeProvider.System, CancellationToken.None,
                 PatchLightHost.CreateProtectionStore(), waitWithHolds: SystemInfo.IsHomeEdition()).GetAwaiter().GetResult();
         }
@@ -92,7 +92,7 @@ public static class Program
         try
         {
             // Nothing PatchLight paused may stay hidden once it's gone.
-            PatchLightHost.CreateService(RequireWindows11()).ReleaseAllAsync(CancellationToken.None).GetAwaiter().GetResult();
+            PatchLightHost.CreateService(RequireSupportedWindows()).ReleaseAllAsync(CancellationToken.None).GetAwaiter().GetResult();
         }
         catch (Exception ex)
         {
@@ -131,7 +131,7 @@ public static class Program
         try
         {
             DataFolder.Secure(SystemInfo.DataDirectory);
-            actions = new ElevatedActions(PatchLightHost.CreateService(RequireWindows11()),
+            actions = new ElevatedActions(PatchLightHost.CreateService(RequireSupportedWindows()),
                 Environment.ProcessPath ?? throw new PatchLightException("Couldn't find PatchLight's own program file."),
                 PatchLightHost.CreateProtectionStore(), new WindowsUpdatePolicyValues(), SystemInfo.IsHomeEdition());
         }
@@ -149,12 +149,11 @@ public static class Program
         return command.RunAsync(actions, CancellationToken.None).GetAwaiter().GetResult();
     }
 
-    public static string RequireWindows11()
+    public static string RequireSupportedWindows()
     {
         var windows = SystemInfo.Read();
-        if (!windows.IsWindows11 || windows.DisplayVersion is null)
-            throw new PatchLightException("PatchLight works on Windows 11 only for now.");
-        return windows.DisplayVersion;
+        if (!windows.IsSupported) throw new PatchLightException(WindowsInfo.NotSupportedMessage);
+        return windows.Release;
     }
 }
 

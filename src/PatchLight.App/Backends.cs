@@ -11,7 +11,7 @@ public static class Backends
         var autostart = Autostart.ForCurrentUser();
         return new Backend
         {
-            Service = PatchLightHost.CreateService(Program.RequireWindows11()),
+            Service = PatchLightHost.CreateService(Program.RequireSupportedWindows()),
             Actions = new RunAsAdministrator(),
             GetDailyCheckAsync = () => Task.Run(() => DailyTask.VisibleXml() switch
             {

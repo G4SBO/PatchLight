@@ -8,7 +8,7 @@ public interface IIssueSource
 public sealed class ReleaseHealthSource(HttpClient http, string cacheDir, TimeProvider time) : IIssueSource
 {
     public static string PageUrl(string windowsVersion) =>
-        $"https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-{windowsVersion.ToLowerInvariant()}";
+        $"https://learn.microsoft.com/en-us/windows/release-health/{WindowsRelease.PageSlug(windowsVersion)}";
 
     public async Task<IssueSnapshot> GetAsync(string windowsVersion, CancellationToken ct)
     {
